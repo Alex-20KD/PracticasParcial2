@@ -7,7 +7,7 @@ export class Mascota {
 
     @Column()
     name: string;
-
+    
     @Column()
     especie: string;
 

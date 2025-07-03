@@ -1,0 +1,128 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type HistorialAdoptante {
+  id: ID!
+  solicitud_id: Float!
+  adopciones_permanentes: Float!
+  adopciones_temporales: Float!
+  fecha_ultima_adopcion: DateTime!
+  calificacion: Float!
+  notas: String!
+  adoptante: Adoptante!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Adoptante {
+  id: ID!
+  name: String!
+  email: String!
+  telefono: Int!
+  direccion: String!
+  tipo_documento: String!
+  numero_documento: Int!
+  fecha_registro: DateTime!
+  status: Boolean!
+  historial: HistorialAdoptante
+  mascotas: [Mascota!]
+}
+
+type Mascota {
+  id: ID!
+  name: String!
+  especie: String!
+  raza: String!
+  edad: Int!
+  genero: String!
+  descripcion: String!
+  foto_url: String!
+  estado_adopcion: Boolean!
+  adoptante: Adoptante
+}
+
+type Query {
+  mascotas: [Mascota!]!
+  mascota(id: String!): Mascota!
+  adoptantes: [Adoptante!]!
+  adoptante(id: String!): Adoptante!
+  historialAdoptantes: [HistorialAdoptante!]!
+  historialAdoptante(id: String!): HistorialAdoptante!
+}
+
+type Mutation {
+  createMascota(createMascotaInput: CreateMascotaInput!): Mascota!
+  updateMascota(updateMascotaInput: UpdateMascotaInput!): Mascota!
+  removeMascota(id: String!): Mascota!
+  createAdoptante(createAdoptanteInput: CreateAdoptanteInput!): Adoptante!
+  updateAdoptante(updateAdoptanteInput: UpdateAdoptanteInput!): Adoptante!
+  removeAdoptante(id: String!): Adoptante!
+  createHistorialAdoptante(createHistorialAdoptanteInput: CreateHistorialAdoptanteInput!): HistorialAdoptante!
+  updateHistorialAdoptante(updateHistorialAdoptanteInput: UpdateHistorialAdoptanteInput!): HistorialAdoptante!
+  removeHistorialAdoptante(id: String!): HistorialAdoptante!
+}
+
+input CreateMascotaInput {
+  name: String!
+  especie: String!
+  raza: String!
+  edad: Int!
+  genero: String!
+  descripcion: String!
+  foto_url: String!
+  estado_adopcion: Boolean = true
+}
+
+input UpdateMascotaInput {
+  name: String
+  especie: String
+  raza: String
+  edad: Int
+  genero: String
+  descripcion: String
+  foto_url: String
+  estado_adopcion: Boolean = true
+  id: ID!
+}
+
+input CreateAdoptanteInput {
+  name: String!
+  email: String!
+  telefono: Int!
+  direccion: String!
+  tipo_documento: String!
+  numero_documento: Int!
+}
+
+input UpdateAdoptanteInput {
+  name: String
+  email: String
+  telefono: Int
+  direccion: String
+  tipo_documento: String
+  numero_documento: Int
+  id: ID!
+}
+
+input CreateHistorialAdoptanteInput {
+  solicitud_id: Float!
+  adopciones_permanentes: Float!
+  adopciones_temporales: Float!
+  fecha_ultima_adopcion: DateTime!
+  calificacion: Int!
+  notas: String!
+}
+
+input UpdateHistorialAdoptanteInput {
+  solicitud_id: Float
+  adopciones_permanentes: Float
+  adopciones_temporales: Float
+  fecha_ultima_adopcion: DateTime
+  calificacion: Int
+  notas: String
+  id: Int!
+}
